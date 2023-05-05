@@ -7,9 +7,11 @@ import studio.wala.mini.controllers.TopicsController;
 import studio.wala.mini.entities.Topic;
 import studio.wala.mini.interfaces.TopicInterface;
 
+import java.io.File;
 import java.io.IOException;
 
 @WebServlet(name = "TopicsServlet", value = "/TopicsServlet")
+@MultipartConfig(location = "D:\\files\\java\\mini\\target\\mini-1.0-SNAPSHOT\\@config")
 public class TopicsServlet extends HttpServlet {
 
     TopicInterface topics;
@@ -67,24 +69,38 @@ public class TopicsServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Get the action
         String action = request.getParameter("action");
 
+        // setting folder upload path;
+        String uploadFilePath = File.separator + "uploads";
+        File fileSaveDir = new File(uploadFilePath);
+        if (!fileSaveDir.exists()) {
+            fileSaveDir.mkdir();
+        }
+
+        // Get the form data
         String topicName = request.getParameter("topicName");
         String topicDescription = request.getParameter("topicDescription");
 
+        //Get all the parts from request and write it to the file on server
+        Part part = request.getPart("topicImage");
+        String fileName = part.getSubmittedFileName();
+        part.write(  uploadFilePath + File.separator + fileName);
+
         if (action.equals("store")) {
-            topics.store(new Topic(topicName, topicDescription, null));
+            topics.store(new Topic(topicName, topicDescription, fileName));
             request.setAttribute("topics", topics.index());
             request.getRequestDispatcher("topic/index.jsp").forward(request, response);
         }
 
         if (action.equals("edit")) {
             int topicId = Integer.parseInt(request.getParameter("uid"));
-            topics.update(new Topic(topicId, topicName, topicDescription, null));
+            topics.update(new Topic(topicId, topicName, topicDescription, fileName));
             request.setAttribute("topics", topics.index());
             request.getRequestDispatcher("topic/index.jsp").forward(request, response);
         }
 
-
     }
+
 }

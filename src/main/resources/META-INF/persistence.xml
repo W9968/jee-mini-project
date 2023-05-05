@@ -8,7 +8,7 @@
 
         <class>studio.wala.mini.entities.User</class>
         <class>studio.wala.mini.entities.Topic</class>
-        <class>studio.wala.mini.entities.Questions</class>
+        <class>studio.wala.mini.entities.Question</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>

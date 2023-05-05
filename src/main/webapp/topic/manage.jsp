@@ -13,17 +13,23 @@
 <body>
 
 
-<form action="TopicsServlet" method="POST" >
+<form action="TopicsServlet" method="POST" enctype="multipart/form-data" >
     <input value="${topic.id}" hidden name="uid" >
     <input value="${topic.topicName}" type="text" name="topicName" placeholder="name">
     <input value="${topic.topicDescription}" type="text" name="topicDescription" placeholder="description">
+    <input type="file" name="topicImage" >
 
     <% if (request.getParameter("action").equals("update")) { %>
-        <button name="action" value="edit">Update</button>
+        <button id="formik-button" name="action" value="edit">Update</button>
     <% } else { %>
-        <button name="action" value="store">Create</button>
+        <button id="formik-button" name="action" value="store">Create</button>
     <% } %>
 </form>
 
+<!--<script>
+    document.querySelector("#formik-button").addEventListener("click", function (e) {
+        e.preventDefault();
+    })
+</script> -->
 </body>
 </html>

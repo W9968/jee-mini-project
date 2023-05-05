@@ -32,6 +32,7 @@
             <th>id</th>
             <th>name</th>
             <th>description</th>
+            <th>image</th>
             <th>action</th>
         </tr>
     </thead>
@@ -41,6 +42,9 @@
                 <td>${topic.id}</td>
                 <td>${topic.topicName}</td>
                 <td>${topic.topicDescription}</td>
+                <td>
+                    <img width="36" height="36" src="${pageContext.request.contextPath}/@config/uploads/${topic.topicImage}" />
+                </td>
                 <td>
                     <a href="TopicsServlet?action=update&uid=${topic.id}">Edit</a>
                     <a href="TopicsServlet?action=delete&uid=${topic.id}">delete</a>

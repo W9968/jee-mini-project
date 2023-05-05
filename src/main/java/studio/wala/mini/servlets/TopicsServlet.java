@@ -57,9 +57,12 @@ public class TopicsServlet extends HttpServlet {
             String keyword = request.getParameter("value");
             request.setAttribute("topics", topics.index(keyword));
             request.getRequestDispatcher("topic/index.jsp").forward(request, response);
-        }
-
-        else {
+        } else if (action.equals("paginate")) {
+            Integer page = Integer.parseInt(request.getParameter("page"));
+            Integer limit = Integer.parseInt(request.getParameter("limit"));
+            request.setAttribute("topics", topics.paginate(page, limit));
+            request.getRequestDispatcher("topic/index.jsp").forward(request, response);
+        } else {
             request.setAttribute("topics", topics.index());
             request.getRequestDispatcher("topic/index.jsp").forward(request, response);
         }

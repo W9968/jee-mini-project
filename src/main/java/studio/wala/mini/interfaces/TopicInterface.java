@@ -12,5 +12,6 @@ public interface TopicInterface {
     public void store(Topic topic) throws RuntimeException;
     public void update(Topic topic) throws RuntimeException;
     public void destroy(Integer id) throws RuntimeException;
+    public List<Topic> paginate(Integer page, Integer limit) throws RuntimeException;
 
 }

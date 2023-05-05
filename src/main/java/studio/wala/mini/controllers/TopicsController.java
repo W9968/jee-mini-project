@@ -54,4 +54,12 @@ public class TopicsController implements TopicInterface {
         em.remove(em.find(Topic.class, id));
         em.getTransaction().commit();
     }
+
+    @Override
+    public List<Topic> paginate(Integer page, Integer limit) throws RuntimeException {
+        Query query = em.createQuery("SELECT t FROM Topic t");
+        query.setFirstResult((page - 1) * limit);
+        query.setMaxResults(limit);
+        return query.getResultList();
+    }
 }

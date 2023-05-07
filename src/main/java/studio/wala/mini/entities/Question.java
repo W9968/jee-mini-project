@@ -2,6 +2,8 @@ package studio.wala.mini.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "questions")
 public class Question {
@@ -19,6 +21,9 @@ public class Question {
 
     @ManyToOne
     private Topic topic;
+
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    private List<Choice> choices;
 
     public Question() {
     }
@@ -61,5 +66,12 @@ public class Question {
     }
     public void setTopic(Topic topic) {
         this.topic = topic;
+    }
+
+    public List<Choice> getChoices() {
+        return choices;
+    }
+    public void setChoices(List<Choice> choices) {
+        this.choices = choices;
     }
 }

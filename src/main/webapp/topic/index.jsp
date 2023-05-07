@@ -7,11 +7,14 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
+
+<jsp:include page="../components/navigation.jsp" />
 
 <p>hello topics</p>
 
@@ -32,6 +35,7 @@
             <th>id</th>
             <th>name</th>
             <th>description</th>
+            <th>questions</th>
             <th>image</th>
             <th>published</th>
             <th>action</th>
@@ -43,11 +47,13 @@
                 <td>${topic.id}</td>
                 <td>${topic.topicName}</td>
                 <td>${topic.topicDescription}</td>
+                <td>${fn:length(topic.questions)}</td>
                 <td>
                     <img width="36" height="36" src="${pageContext.request.contextPath}/@config/uploads/${topic.topicImage}" />
                 </td>
                 <td>${topic.topicIsPublished}</td>
                 <td>
+                    <a href="TopicsServlet?action=show&uid=${topic.id}">show</a>
                     <a href="TopicsServlet?action=update&uid=${topic.id}">Edit</a>
                     <a href="TopicsServlet?action=delete&uid=${topic.id}">delete</a>
                     <c:choose>

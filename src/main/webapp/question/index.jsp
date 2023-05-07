@@ -7,11 +7,14 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
+
+<jsp:include page="../components/navigation.jsp" />
 
 <p>hello questions</p>
 
@@ -45,6 +48,7 @@
         <th>name</th>
         <th>description</th>
         <th>belongs to</th>
+        <th>mcq</th>
         <th>action</th>
     </tr>
     </thead>
@@ -55,7 +59,9 @@
             <td>${question.title}</td>
             <td>${question.description}</td>
             <td>${question.topic.topicName}</td>
+            <td>${fn:length(question.choices)}</td>
             <td>
+                <a href="QuestionServlet?action=show&uid=${question.id}">show</a>
                 <a href="QuestionServlet?action=update&uid=${question.id}">Edit</a>
                 <a href="QuestionServlet?action=delete&uid=${question.id}">delete</a>
             </td>

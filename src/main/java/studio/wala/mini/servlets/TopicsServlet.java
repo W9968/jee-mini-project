@@ -26,7 +26,7 @@
             String action = request.getParameter("action");
     
             if (action == null) {
-                request.setAttribute("topics", topics.index());
+                request.setAttribute("topics", topics.paginate(1, 10));
                 request.getRequestDispatcher("topic/index.jsp").forward(request, response);
             }
     
@@ -76,7 +76,7 @@
             }
 
             else {
-                request.setAttribute("topics", topics.index());
+                request.setAttribute("topics", topics.paginate(1, 10));
                 request.getRequestDispatcher("topic/index.jsp").forward(request, response);
             }
     
@@ -102,7 +102,6 @@
             //Get all the parts from request and write it to the file on server
             Part part = request.getPart("topicImage");
             String fileName = part.getSubmittedFileName();
-            part.delete();
             part.write(  uploadFilePath + File.separator + fileName);
     
             if (action.equals("store")) {

@@ -33,6 +33,7 @@
             <th>name</th>
             <th>description</th>
             <th>image</th>
+            <th>published</th>
             <th>action</th>
         </tr>
     </thead>
@@ -45,9 +46,18 @@
                 <td>
                     <img width="36" height="36" src="${pageContext.request.contextPath}/@config/uploads/${topic.topicImage}" />
                 </td>
+                <td>${topic.topicIsPublished}</td>
                 <td>
                     <a href="TopicsServlet?action=update&uid=${topic.id}">Edit</a>
                     <a href="TopicsServlet?action=delete&uid=${topic.id}">delete</a>
+                    <c:choose>
+                        <c:when test="${topic.topicIsPublished == false}">
+                            <a href="TopicsServlet?action=publish&uid=${topic.id}&isPublish=true">publish</a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="TopicsServlet?action=publish&uid=${topic.id}&isPublish=false">deactivate</a>
+                        </c:otherwise>
+                    </c:choose>
                 </td>
             </tr>
         </c:forEach>

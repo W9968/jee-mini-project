@@ -20,18 +20,23 @@ public class Topic {
     @Column(name ="topic_image", nullable = true)
     private String topicImage;
 
+    @Column(name ="topic_isPublished", nullable = false)
+    private Boolean topicIsPublished = false;
+
     /* constructors */
     public Topic() {}
-    public Topic(String topicName, String topicDescription, String topicImage) {
+    public Topic(String topicName, String topicDescription, String topicImage, Boolean topicIsPublished) {
         this.topicName = topicName;
         this.topicDescription = topicDescription;
         this.topicImage = topicImage;
+        this.topicIsPublished = topicIsPublished;
     }
-    public Topic(Integer id, String topicName, String topicDescription, String topicImage) {
+    public Topic(Integer id, String topicName, String topicDescription, String topicImage, Boolean topicIsPublished) {
         this.id = id;
         this.topicName = topicName;
         this.topicDescription = topicDescription;
         this.topicImage = topicImage;
+        this.topicIsPublished = topicIsPublished;
     }
 
     /* getters and setters */
@@ -61,5 +66,12 @@ public class Topic {
     }
     public void setTopicImage(String topicImage) {
         this.topicImage = topicImage;
+    }
+
+    public Boolean getTopicIsPublished() {
+        return topicIsPublished;
+    }
+    public void setTopicIsPublished(Boolean topicIsPublished) {
+        this.topicIsPublished = topicIsPublished;
     }
 }

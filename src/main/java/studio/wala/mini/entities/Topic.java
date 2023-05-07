@@ -2,6 +2,8 @@ package studio.wala.mini.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "topics")
 public class Topic {
@@ -22,6 +24,9 @@ public class Topic {
 
     @Column(name ="topic_isPublished", nullable = false)
     private Boolean topicIsPublished = false;
+
+    @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL)
+    private List<Question> questions;
 
     /* constructors */
     public Topic() {}
@@ -73,5 +78,12 @@ public class Topic {
     }
     public void setTopicIsPublished(Boolean topicIsPublished) {
         this.topicIsPublished = topicIsPublished;
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
     }
 }

@@ -9,5 +9,6 @@
 </h1>
 <br/>
 <a href="TopicsServlet">topics</a>
+<a href="QuestionServlet" >questions</a>
 </body>
 </html>

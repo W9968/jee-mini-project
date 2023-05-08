@@ -14,8 +14,6 @@
 </head>
 <body>
 
-<jsp:include page="../components/navigation.jsp" />
-
 <p>hello questions</p>
 
 <a href="QuestionServlet?action=create">Add New question</a>

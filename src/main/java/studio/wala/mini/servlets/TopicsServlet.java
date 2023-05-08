@@ -74,13 +74,10 @@
                 request.setAttribute("topics", topics.paginate(page, limit));
                 request.getRequestDispatcher("topic/index.jsp").forward(request, response);
             }
-
             else {
                 request.setAttribute("topics", topics.paginate(1, 10));
                 request.getRequestDispatcher("topic/index.jsp").forward(request, response);
             }
-    
-    
         }
     
         @Override
@@ -112,7 +109,7 @@
     
             if (action.equals("edit")) {
                 int topicId = Integer.parseInt(request.getParameter("uid"));
-                topics.update(new Topic(topicId, topicName, topicDescription, topics.show(topicId).getTopicImage(), topics.show(topicId).getTopicIsPublished()));
+                topics.update(new Topic(topicId, topicName, topicDescription, fileName, topics.show(topicId).getTopicIsPublished()));
                 request.setAttribute("topics", topics.index());
                 request.getRequestDispatcher("topic/index.jsp").forward(request, response);
             }

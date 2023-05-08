@@ -14,8 +14,6 @@
 </head>
 <body>
 
-<jsp:include page="../components/navigation.jsp" />
-
 <p>title => ${question.title}</p>
 <p>content => ${question.description}</p>
 <p>author => ${question.topic.topicName}</p>

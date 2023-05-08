@@ -57,6 +57,7 @@ public class TopicsController implements TopicInterface {
 
     @Override
     public List<Topic> paginate(Integer page, Integer limit) throws RuntimeException {
+        em.getEntityManagerFactory().getCache().evict(Topic.class);
         Query query = em.createQuery("SELECT t FROM Topic t");
         query.setFirstResult((page - 1) * limit);
         query.setMaxResults(limit);

@@ -14,8 +14,6 @@
 </head>
 <body>
 
-<jsp:include page="../components/navigation.jsp" />
-
 <form action="TopicsServlet" method="POST" enctype="multipart/form-data" >
     <input value="${topic.id}" hidden name="uid" >
     <input value="${topic.topicName}" type="text" name="topicName" placeholder="name">

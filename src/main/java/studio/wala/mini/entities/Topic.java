@@ -25,7 +25,7 @@ public class Topic {
     @Column(name ="topic_isPublished", nullable = false)
     private Boolean topicIsPublished = false;
 
-    @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Question> questions;
 
     /* constructors */
@@ -86,4 +86,18 @@ public class Topic {
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
     }
+
+
+    public void addQuestion(Question question) {
+        if (!this.questions.contains(question)) {
+            this.questions.add(question);
+            question.setTopic(this);
+        }
+    }
+
+    public void removeQuestion(Question question) {
+        question.setTopic(null);
+        this.questions.remove(question);
+    }
+
 }

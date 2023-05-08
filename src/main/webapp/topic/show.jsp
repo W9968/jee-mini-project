@@ -14,12 +14,12 @@
 </head>
 <body>
 
-<jsp:include page="../components/navigation.jsp" />
-
 <img width="36" height="36" src="${pageContext.request.contextPath}/@config/uploads/${topic.topicImage}" />
 <p>name => ${topic.topicName}</p>
 <p>published => ${topic.topicIsPublished}</p>
 <p>description =>  ${topic.topicDescription}</p>
+
+<a href="QuestionServlet?action=create&topic=${topic.id}" >add new question</a>
 
 <table>
   <thead>
@@ -37,8 +37,8 @@
       <td>${question.title}</td>
       <td>${question.description}</td>
       <td>
-        <a href="QuestionServlet?action=update&uid=${question.id}">Edit</a>
-        <a href="QuestionServlet?action=delete&uid=${question.id}">delete</a>
+        <a href="QuestionServlet?action=update&uid=${question.id}&topic=${topic.id}">Edit</a>
+        <a href="QuestionServlet?action=delete&uid=${question.id}&topic=${topic.id}">delete</a>
       </td>
     </tr>
   </c:forEach>

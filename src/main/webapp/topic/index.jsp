@@ -14,8 +14,6 @@
 </head>
 <body>
 
-<jsp:include page="../components/navigation.jsp" />
-
 <p>hello topics</p>
 
 <a href="TopicsServlet?action=create">Add New Plate</a>

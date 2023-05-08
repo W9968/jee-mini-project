@@ -12,6 +12,7 @@ import studio.wala.mini.interfaces.TopicInterface;
 import java.io.IOException;
 
 @WebServlet(name = "QuestionServlet", value = "/QuestionServlet")
+@MultipartConfig
 public class QuestionServlet extends HttpServlet {
 
     QuestionInterface questions;
@@ -34,7 +35,7 @@ public class QuestionServlet extends HttpServlet {
         }
 
         else if (action.equals("create")) {
-            request.setAttribute("topics", topics.index());
+            request.setAttribute("topic", request.getParameter("topic"));
             request.getRequestDispatcher("question/manage.jsp").forward(request, response);
         }
 
@@ -60,10 +61,12 @@ public class QuestionServlet extends HttpServlet {
 
         else if (action.equals("delete")) {
             int questionId = Integer.parseInt(request.getParameter("uid"));
+            int topicId = Integer.parseInt(request.getParameter("topic"));
+            topics.show(topicId).getQuestions().remove(questions.show(questionId));
             questions.destroy(questionId);
-            request.setAttribute("questions", questions.paginate(1,10));
-            request.setAttribute("topics", topics.index());
-            request.getRequestDispatcher("question/index.jsp").forward(request, response);
+            topics.show(topicId).setQuestions(questions.filter(topicId));
+            request.setAttribute("topic", topics.show(topicId));
+            request.getRequestDispatcher("topic/show.jsp").forward(request, response);
         }
 
         else if (action.equals("paginate")) {
@@ -100,10 +103,11 @@ public class QuestionServlet extends HttpServlet {
         int topicId = Integer.parseInt(request.getParameter("topic_id"));
 
         if (action.equals("store")) {
-            questions.store(new Question(title, description, topics.show(topicId)));
-            request.setAttribute("questions", questions.paginate(1,10));
-            request.setAttribute("topics", topics.index());
-            request.getRequestDispatcher("question/index.jsp").forward(request, response);
+            Question question = new Question(title, description, topics.show(topicId));
+            questions.store(question);
+            topics.show(topicId).addQuestion(question);
+            request.setAttribute("topic", topics.show(topicId));
+            request.getRequestDispatcher("topic/show.jsp").forward(request, response);
         }
 
         if (action.equals("edit")) {

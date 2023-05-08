@@ -15,17 +15,11 @@
 </head>
 <body>
 
-<jsp:include page="../components/navigation.jsp" />
-
-<form action="QuestionServlet" method="POST">
+<form action="QuestionServlet" method="POST"  enctype="multipart/form-data" >
     <input value="${question.id}" hidden name="uid" >
+    <input value="${topic}" hidden name="topic_id" >
     <input value="${question.title}" type="text" name="title" placeholder="name">
     <input value="${question.description}" type="text" name="description" placeholder="description">
-    <select name="topic_id">
-        <c:forEach items="${topics}" var="topic">
-            <option value="${topic.id}" <c:if test="${question.topic.id == topic.id}">selected</c:if> >${topic.topicName}</option>
-        </c:forEach>
-    </select>
 
     <% if (request.getParameter("action").equals("update")) { %>
     <button id="formik-button" name="action" value="edit">Update</button>
@@ -34,10 +28,5 @@
     <% } %>
 </form>
 
-<!--<script>
-    document.querySelector("#formik-button").addEventListener("click", function (e) {
-        e.preventDefault();
-    })
-</script> -->
 </body>
 </html>

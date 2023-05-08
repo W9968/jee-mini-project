@@ -10,5 +10,12 @@
 <br/>
 <a href="TopicsServlet">topics</a>
 <a href="QuestionServlet" >questions</a>
+
+<p>welcome: ${sessionScope.user.username}</p>
+
+<c:if test="${sessionScope.user}">
+    <a href="LogoutServlet">logout</a>
+</c:if>
+
 </body>
 </html>
